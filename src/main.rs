@@ -62,6 +62,7 @@ impl Data {
         // Compute current hashes
         let mut data = HashMap::default();
         for entry in files {
+            debug! {"Computing hash of {:?}", entry};
             data.insert(entry.path().into(), Entry::from_file(entry.path())?);
         }
         info!("Computed hashes for {} files", data.len());
@@ -75,8 +76,7 @@ impl Data {
     }
     fn load_cached(root: &Path) -> anyhow::Result<Self> {
         info!("Loading cached state...");
-        let cached =
-            std::fs::read(Self::hashes_file(root)).context("Could not open hash file.")?;
+        let cached = std::fs::read(Self::hashes_file(root)).context("Could not open hash file.")?;
         let cached: Self = bincode::deserialize(&cached)?;
         anyhow::ensure!(
             cached.root == root,

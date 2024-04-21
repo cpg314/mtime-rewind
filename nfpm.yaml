@@ -1,0 +1,17 @@
+name: "mtime-rewind"
+arch: "amd64"
+platform: "linux"
+version: "${CARGO_MAKE_PROJECT_VERSION}"
+release: "${RELEASE}"
+section: "default"
+priority: "extra"
+provides:
+  - mtime-rewind
+description: "Rewind the mtime of files whose mtime advanced since the last execution without a content change. "
+vendor: "cpg314"
+maintainer: "cpg314 <44120267+cpg314@users.noreply.github.com>"
+homepage: "https://github.com/cpg314/mtime-rewind"
+contents:
+  - src: "./target-cross/$ARCH/release/mtime-rewind"
+    dst: /usr/local/bin/mtime-rewind
+    expand: true
